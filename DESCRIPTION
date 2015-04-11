@@ -20,4 +20,5 @@ Imports: xts,
     ggplot2,
     gridExtra,
     factorAnalytics,
-    caret
+    caret,
+    reshape2
