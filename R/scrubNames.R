@@ -1,0 +1,27 @@
+#' Scrub the fund or asset names from an xts object and replace with 'Fund.x'.
+#'
+#' Sometimes it is necessary to cover up the names of the funds when
+#' distributing analyses to colleagues. This little function takes care of that
+#' problem.
+#'
+#' @param x an xts object to be scrubbed.
+#'
+#' @return an xts object with the names replaced by 'Fund.x' where x is a
+#'     number ranging from 1 to ncol(x).
+#'
+#' @examples
+#' dts <- seq(Sys.Date()-199, Sys.Date(), 1)
+#' returns <- matrix(rnorm(1000),ncol = 5) / 100
+#' ret.xts <- xts(returns, dts)
+#' colnames(ret.xts) <- rep(c("Real Name"),ncol(ret.xts))
+#' ret.nonames <- scrubNames(ret.xts)
+#' head(ret.nonames)
+#'
+#' @export
+#'
+scrubNames <- function(x) {
+  out <- x
+  names.scrubbed <- paste("Fund.", seq(1, ncol(x), 1), sep = "")
+  colnames(out) <- names.scrubbed
+  return(out)
+}

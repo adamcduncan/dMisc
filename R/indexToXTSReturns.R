@@ -4,18 +4,25 @@
 #' contains a wealth index and converts it to returns.
 #'
 #' @param x an xts object containing one or more wealth indices.
-
+#'
+#' @return an xts object containing the returns for each wealth index in x.
+#'
+#' @export
+#'
+#' @examples
+#' dts <- seq(Sys.Date()-4, Sys.Date(), 1)
+#' returns <- matrix(rnorm(5),ncol = 1) / 100
+#' ret.xts <- xts(returns, dts)
+#' x <- makeIndex(ret.xts)
+#' indexToXTSReturns(x)
 indexToXTSReturns <- function(x) {
 
-  if (names(x)[1] == "Date") {
-    dts <- as.Date(x$Date, format = "%Y-%m-%d")
-    ret <- subset(x, select = -Date)
-    ret <- xts(ret, dts)
-    ret.ret <- apply(ret, MARGIN = 2, Return.calculate, method = "log")
+  if (!is.xts(x)) {
+    stop ("You must supply an xts object.")
   } else {
     dts <- index(x, 0)
     # we already have an xts object
-    ret.ret <- apply(x, MARGIN = 2, Return.calculate, method = "log")
+    ret.ret <- apply(x, MARGIN = 2, Return.calculate, method = "discrete")
   }
   ret.ret[1, ] <- 0
   ret.ret <- xts(ret.ret, dts)

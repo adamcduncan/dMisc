@@ -16,6 +16,7 @@
 #'@examples
 #'mydata <- read.csv("mydata.csv",sep = ",")
 #'mydata.xts <- makeXTS(mydata)
+#'@export
 makeXTS <- function(x, format = "%Y-%m-%d",
                     names = colnames(x)[2:ncol(x)]) {
 

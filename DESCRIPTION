@@ -1,7 +1,7 @@
 Package: dMisc
 Type: Package
 Title: A Collection of Helper Functions for Doing Financial Data Analysis
-Version: 0.1
+Version: 0.0.3
 Date: 2015-04-08
 Author: Adam Duncan
 Maintainer: Adam Duncan <aduncaninmotion@gmail.com>
@@ -18,7 +18,9 @@ LazyData: TRUE
 Imports: xts,
     PerformanceAnalytics,
     ggplot2,
-    gridExtra,
-    factorAnalytics,
-    caret,
-    reshape2
+    Rcpp,
+    grid,
+    reshape2,
+    magrittr,
+    TTR,
+    quantmod
