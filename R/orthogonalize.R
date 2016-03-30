@@ -15,7 +15,7 @@
 #'     to \code{mkt_var}
 #' @export
 
-orthogonalize <- function(mkt_var, f, reconstitute = T, demean = F, inc_alphas = F){
+orthogonalize <- function(mkt_var, f, reconstitute = T, demean = F, inc_alphas = T){
   # Regress a set of factors s against the mkt_var and return the alpha+
   # residuals. These are new "pseudo" factors that contain information not
   # captured by mkt_var. (at least not in a linear way)
@@ -27,17 +27,24 @@ orthogonalize <- function(mkt_var, f, reconstitute = T, demean = F, inc_alphas =
   } else {
     # user wants us to actually run regressions and return residuals + Bo.
     out <- xtsApply(f,cFUN = function(x){
-      as.numeric(residuals(lm(x~mkt_var))) +
-        ifelse(inc_alphas, as.numeric(coef(lm(x~mkt_var))[1]), 0)
+      as.numeric(residuals(lm(x ~ mkt_var))) +
+        ifelse(inc_alphas, as.numeric(coef(lm(x ~ mkt_var))[1]), 0)
     })
   }
   # out now contains alpha + error terms or is just de-meaned in the single
   # column case.
 
-  if (reconstitute){
+  if (reconstitute) {
     # put the mkt_var variable back into the xts object, if requested by caller.
-    out <-  out[ , -which(names(out) %in% names(mkt_var))]
-    out <- xts(cbind(mkt_var, out),index(mkt_var))
+    dup_names <- which(names(out) %in% names(mkt_var))
+
+    if (length(dup_names) == 0L) {
+      out <- xts(cbind(mkt_var, out),index(mkt_var))
+    } else {
+      out <-  out[ , -dup_names]
+      out <- xts(cbind(mkt_var, out),index(mkt_var))
+    }
+
   } else {
     out <- xts(out,index(mkt_var))
   }

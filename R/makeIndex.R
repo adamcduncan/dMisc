@@ -32,29 +32,34 @@
 
 makeIndex <- function(x, inv = FALSE, ret = TRUE, na.rm = TRUE) {
 
-  x <- as.xts(x)
+  stopifnot(is.xts(x))
+  data <- x
   init.val <- 100
-  nam <- names(x)
-  dts <- as.Date(unlist(strsplit(as.character(index(x)), " ")))
-  if (na.rm) {
-    data <- apply(x, 2, na.omit)
-  }
-  if (inv == TRUE)
-    data <- 1/x else data <- x
-    if (ret == TRUE) {
-      # we have a series of returns...
-      ret.series <- data
-    } else {
-      ret.series <- Return.calculate(data, method = "discrete")
-    }
-    n <- nrow(ret.series)
-    new.series <- rep(0, n)
-    new.series[1] <- init.val
+  nam <- names(data)
+  dts <- as.Date(unlist(strsplit(as.character(index(data)), " ")))
 
-    for (i in 2:n) {
-      new.series[i] <- (1 + ret.series[i]) * new.series[i - 1]
-    }
-    new.series <- xts(new.series, dts)
-    names(new.series) <- nam
-    return(new.series)
+  if (na.rm) {
+    data <- na.omit(data)
+  }
+
+  if (inv == TRUE) {
+    data <- 1/data
+  }
+
+  if (!ret) {
+    data <- Return.calculate(data, method = "discrete")
+  }
+
+  n <- nrow(data)
+  new.series <- rep(0, n)
+
+  new.series[1] <- init.val * (1 + data[1])
+
+  for (i in 2:n) {
+    new.series[i] <- (1 + data[i]) * new.series[i - 1]
+  }
+  new.series <- xts(new.series, dts)
+  names(new.series) <- nam
+
+  return(new.series)
 }

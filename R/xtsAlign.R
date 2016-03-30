@@ -27,7 +27,9 @@
 xtsAlign <- function(target, match.to, join = "inner") {
   # Takes two xts objects and aligns their dates returning target with the
   # same date structure as match.to (trims does not merge objects)
-
+  if (nrow(target) < nrow(match.to)) {
+    warning("Target is shorter than match.to vector. Not sure what to do.")
+  }
   dummy <- xts(rep(1, nrow(match.to)), index(match.to))
   ret <- merge.xts(target, dummy, join = join)
   ret <- subset(ret, select = (-dummy))

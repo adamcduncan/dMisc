@@ -27,11 +27,13 @@
 #' @export
 volAdjust <- function(a, target.vol = 1) {
 
+  stopifnot(is.xts(a))
+
   if (ncol(a) == 1) {
-    vol.scale.factor <- target.vol / sd(a)
+    vol.scale.factor <- target.vol / sd(na.omit(a))
     out <- a * vol.scale.factor
   } else {
-    vol.scale.factors = xtsApply(a, function(x) target.vol / sd(x))
+    vol.scale.factors = xtsApply(a, function(x) target.vol / sd(na.omit(x)))
     out <- a * vol.scale.factors
   }
   return(out)
