@@ -9,6 +9,7 @@
 #'@return an xts object with the weights, w, applied to R.
 #'
 #'@examples
+#'library(xts)
 #'dts <- seq(Sys.Date()-4, Sys.Date(), 1)
 #'returns <- matrix(rnorm(10),ncol = 2) / 100
 #'ret.xts <- xts(returns, dts)
@@ -22,7 +23,7 @@
 applyWeights <- function(w, R) {
   # Apply weights to an xts object of assets R.
 
-  r <- checkData(R)
+  r <- PerformanceAnalytics::checkData(R)
   out <- sweep(r, MARGIN = 2, STATS = w, FUN = '*')
 
   return(out)

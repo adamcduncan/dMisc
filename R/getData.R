@@ -5,12 +5,9 @@
 #' asset classes.
 #'
 #' @param tickers a character vector of symbols to be passed to getSymbols.
-#'
-#' @examples
-#' Fill this in...
-#'
+#' @param datasrc the data source for the call. Usually, "yahoo" or "google" or "FRED".
+#' @param quiet controls verboseness of getSymbols call.
 #' @export
-
 getData <- function(tickers, datasrc, quiet = FALSE, ...) {
   # Wrapper for getSymbols that can handle lists of tickers. You can pass a
   # list of ticker vectors or a single ticker vector.  Recursively calls
@@ -19,11 +16,11 @@ getData <- function(tickers, datasrc, quiet = FALSE, ...) {
   if (class(tickers) %in% "character") {
     for (i in 1:length(tickers)) {
 
-      getSymbols(tickers[i], src = datasrc,
+      quantmod::getSymbols(tickers[i], src = datasrc,
                  auto.assign = getOption("getSymbols.auto.assign", TRUE),
                  env = globalenv(), ...)
 
-      if(quiet == FALSE){
+      if(quiet == FALSE) {
         cat(tickers[i], i, "\n")
       }
     }

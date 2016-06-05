@@ -4,6 +4,8 @@
 #' orthogonal then the angle will be 90 degrees. This is a helper function for
 #' dMisc::plotCovEllipse(). It can be called directly if needed.
 #'
+#'Original code from StackOverflow, but I don't have attribution.
+#'
 #' @param u a vector of numeric values. (Must be at least length = 2)
 #' @param v a vector of numeric values. (Must be at least length = 2)
 #'
@@ -18,7 +20,7 @@
 #'
 getAngle <- function(u, v) {
 
-  if(length(u) < 2 || length(v) < 2){
+  if (length(u) < 2 || length(v) < 2){
     return("Vectors u and v must both be of at least length 2.")
   } else {
     # Calculate eigen vector and eigen values from the covariance matrix of

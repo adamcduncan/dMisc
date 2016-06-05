@@ -4,15 +4,16 @@
 \alias{makeNoise}
 \title{Create a set of returns in xts format that follow a specified distribution.}
 \usage{
-makeNoise(n, dates, num_assets, dist, ...)
+makeNoise(num_assets = 1, num_returns = 60, dates = NULL,
+  dist = "rnorm", ...)
 }
 \arguments{
-\item{n}{the number of returns you would like returned.}
+\item{num_assets}{the number of columns of length \code{n} to create.}
+
+\item{num_returns}{the number of rows you would like returned.}
 
 \item{dates}{the dates you would like to use for the returns. If NULL, the
 function will use \code{SysDate()} and go back in time \code{n} days.}
-
-\item{num_assets}{the number of columns of length \code{n} to create.}
 
 \item{dist}{one of "rnorm", "runif", or "dt".}
 
@@ -29,8 +30,9 @@ wrapper for rnorm etc. that handles all the time series wrangling.
 }
 \examples{
 # Make 5 normally distributed assets...
-makeNoise(10, dates = NULL, num_assets = 5, dist = "rnorm", mean = .05/252,
-sd = .10/sqrt(252))
+makeNoise(5)
 
+# Make 5 normally distributed assets, 10 returns each, with sd = .10/sqrt(252), mean = 0)
+makeNoise(5, num_returns = 10, mean = 0, sd = .10/sqrt(252))
 }
 

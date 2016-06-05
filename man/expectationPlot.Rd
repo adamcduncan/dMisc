@@ -16,10 +16,12 @@ expectationPlot(x, exp.sharpe, exp.ann.vol, scale = 12, cols = 1,
 
 \item{scale}{the annualization factor for the returns. (eg. 12 = monthly)}
 
-\item{numrows}{the number of rows in the graphics window. Passed to mfrow().}
+\item{cols}{the number of columns in the graphics window.}
 
-\item{numcols}{the number of columns in the graphics window. Passed to
-mfrow().}
+\item{auto.arrange}{set to FALSE if you want to specify the number of columns
+in the plot. Otherwise, funds will be auto-arranged in plot window.}
+
+\item{mytheme}{a valide ggplot2 theme. Default is theme_bw.}
 
 \item{...}{additional pass-through paramaters for chart.Timeseries}
 }

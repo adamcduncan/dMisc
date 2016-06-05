@@ -19,6 +19,9 @@ This function returns the angle between two vectors u and v. If u and v are
 orthogonal then the angle will be 90 degrees. This is a helper function for
 dMisc::plotCovEllipse(). It can be called directly if needed.
 }
+\details{
+Original code from StackOverflow, but I don't have attribution.
+}
 \examples{
 u <- rnorm(5,0,1)
 v <- rnorm(5,0,1.5)

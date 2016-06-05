@@ -47,7 +47,7 @@ makeIndex <- function(x, inv = FALSE, ret = TRUE, na.rm = TRUE) {
   }
 
   if (!ret) {
-    data <- Return.calculate(data, method = "discrete")
+    data <- PerformanceAnalytics::Return.calculate(data, method = "discrete")
   }
 
   n <- nrow(data)

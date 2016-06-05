@@ -8,14 +8,14 @@ getData(tickers, datasrc, quiet = FALSE, ...)
 }
 \arguments{
 \item{tickers}{a character vector of symbols to be passed to getSymbols.}
+
+\item{datasrc}{the data source for the call. Usually, "yahoo" or "google" or "FRED".}
+
+\item{quiet}{controls verboseness of getSymbols call.}
 }
 \description{
 This is just a simple wrapper for getSymbols that can take either a
 single ticker vector or a list of ticker vectors for, say, multiple
 asset classes.
-}
-\examples{
-Fill this in...
-
 }
 

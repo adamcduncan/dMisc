@@ -27,20 +27,20 @@
 #'
 maCrossoverSignal <- function(x, s = 50, l = 100) {
 
-  if(!is.xts(x)){
+  if (!xts::is.xts(x)) {
     return("Must pass an xts object to this function.")
   } else {
 
-    sa <- rollmean(x, k = s, align = "right")
+    sa <- zoo::rollmean(x, k = s, align = "right")
     names(sa) <- "sa"
 
-    la <- rollmean(x, k = l, align = "right")
+    la <- zoo::rollmean(x, k = l, align = "right")
     names(la) <- "la"
 
-    both <- merge.xts(sa, la, join = "inner")
+    both <- xts::merge.xts(sa, la, join = "inner")
     names(both) <- c("sa", "la")
 
-    signal <- xts(sign(both$sa - both$la), index(both))
+    signal <- xts::xts(sign(both$sa - both$la), index(both))
     names(signal) <- "macSignal"
 
     return(signal)

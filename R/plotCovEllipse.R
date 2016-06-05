@@ -67,7 +67,7 @@ plotCovEllipse <- function(a, b) {
       geom_histogram(aes(b), colour = "grey60", binwidth = 0.1) +
       coord_flip()
 
-    scatter <- ggplot(data = df, aes(x = x, y = y), colour = "red",
+    scatter <- ggplot2::ggplot(data = df, aes(x = x, y = y), colour = "red",
                       environment = environment()) +
       geom_point(size = 1.5, alpha = 0.8, colour = "dark blue") +
       geom_path(data = el,aes(x = x, y = y),

@@ -1,8 +1,8 @@
 Package: dMisc
 Type: Package
 Title: A Collection of Helper Functions for Doing Financial Data Analysis
-Version: 0.0.3
-Date: 2015-04-08
+Version: 0.0.4
+Date: 2016-06-05
 Author: Adam Duncan
 Maintainer: Adam Duncan <aduncaninmotion@gmail.com>
 Description: This collection of functions is basically a set of tools that I
@@ -15,16 +15,16 @@ Description: This collection of functions is basically a set of tools that I
     list of tickers can be handled by tickersToXTS(). In many ways, this package is
     like the hMisc package which I imagine was created to resolve the many issues
     they encountered in data to day R life.
-License: What license is it under?
+License: GPL-2
 LazyData: TRUE
 Imports:
     xts,
     PerformanceAnalytics,
     ggplot2,
-    Rcpp,
     grid,
     reshape2,
-    magrittr,
+    matrixcalc,
     TTR,
-    quantmod
+    quantmod,
+    zoo
 RoxygenNote: 5.0.1

@@ -19,6 +19,7 @@ This function is just a wrapper to the 'sweep' function because the
 arguments to sweep are too hard to remember.
 }
 \examples{
+library(xts)
 dts <- seq(Sys.Date()-4, Sys.Date(), 1)
 returns <- matrix(rnorm(10),ncol = 2) / 100
 ret.xts <- xts(returns, dts)

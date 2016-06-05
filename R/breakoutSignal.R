@@ -20,7 +20,7 @@
 #' dts <- seq(Sys.Date()-99, Sys.Date(), 1)
 #' returns <- matrix(rnorm(100),ncol = 1) / 100
 #' ret.xts <- xts(returns, dts)
-#' s <- simpSignal(ret.xts, lookback = 5)
+#' s <- breakoutSignal(ret.xts, lookback = 5)
 #' plot(s, type = "l")
 #'
 #' @export
@@ -31,13 +31,11 @@ breakoutSignal <- function(x, lookback = 12){
     return("Only xts or equivalent objects supported.")
   } else {
 
-    if(length(x) <= (lookback+1)) {
+    if(length(x) <= (lookback + 1)) {
       return("x must be longer in length than lookback + 1.")
 
     } else {
-      d <- DonchianChannel(x, n = lookback, include.lag = T)
-
-      #print(tail(all), 25)
+      d <- TTR::DonchianChannel(x, n = lookback, include.lag = T)
 
       signals <- NULL
 

@@ -31,7 +31,7 @@ library(dMisc)
 dts <- seq(Sys.Date()-99, Sys.Date(), 1)
 returns <- matrix(rnorm(100),ncol = 1) / 100
 ret.xts <- xts(returns, dts)
-s <- simpSignal(ret.xts, lookback = 5)
+s <- breakoutSignal(ret.xts, lookback = 5)
 plot(s, type = "l")
 
 }

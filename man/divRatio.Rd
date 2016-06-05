@@ -4,7 +4,7 @@
 \alias{divRatio}
 \title{Compute the Diversification Ratio for a portfolio.}
 \usage{
-divRatio(w = NULL, R, sigma)
+divRatio(w = NULL, R, sigma, scale = 12)
 }
 \arguments{
 \item{w}{a vector of weights.}

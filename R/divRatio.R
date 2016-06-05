@@ -25,12 +25,12 @@
 #' @seealso wtdAvgVol, portfolioVol
 #' @export
 #'
-divRatio <- function(w = NULL, R, sigma) {
+divRatio <- function(w = NULL, R, sigma, scale = 12) {
   if (is.null(w)) {
     w <- rep(1/ncol(R), ncol(R))
   }
-  wav <- wtdAvgVol(w = w, R = R, scale = 1)
-  pvol <- portfolioVol(w = w, R = R, sigma = sigma, scale = 1)
+  wav <- dMisc::wtdAvgVol(w = w, R = R, scale = scale)
+  pvol <- dMisc::portfolioVol(w = w, R = R, sigma = sigma, scale = scale)
   dr <- wav / pvol
   return(dr)
 }

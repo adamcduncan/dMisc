@@ -43,7 +43,7 @@ makeGrossReturns <- function(nr, mgmt.fee = 0.02, perf.fee = 0.2,
   if (!is.xts(nr))
     stop("Must supply function with xts object")
   dts <- index(nr)
-  nr.index <- makeIndex(nr)
+  nr.index <- dMisc::makeIndex(nr)
   gr <- NULL
   gr[1] <- nr[1] + (mgmt.fee + ann.exp)/scale
 
